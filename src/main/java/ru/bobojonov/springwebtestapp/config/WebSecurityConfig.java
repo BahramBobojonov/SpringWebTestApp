@@ -19,7 +19,7 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().dispatcherTypeMatchers("/register/**").permitAll().dispatcherTypeMatchers("/index").permitAll().dispatcherTypeMatchers("/users").hasRole("ADMIN").and().formLogin(form -> form.loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/users").permitAll()).logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
+        http.csrf().disable().authorizeRequests().requestMatchers("/register/**").permitAll().requestMatchers("/index").permitAll().requestMatchers("/users").hasRole("ADMIN").and().formLogin(form -> form.loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/users").permitAll()).logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
         return http.build();
     }
 }
